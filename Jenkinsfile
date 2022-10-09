@@ -12,9 +12,13 @@ pipeline
     {
         stage('Deploy')
         {
+            steps {
                 sh '''
                     eb init --platform node.js --region us-east-2
+                    pwd
+                    ls
                 '''
             }
+        }
     }
 }
