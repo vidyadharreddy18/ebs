@@ -1,23 +1,9 @@
-pipeline {
-   agent any
-       stage('Build Code') {
-           when {
-               branch "master"
-           }
-           steps {
-               sh """
-               echo "Building Artifact from Develop Branch"
-               """
-           }
-       }
-      stage('Deploy Code') {
-           when {
-               branch "master"
-           }
-          steps {
-               sh """
-               echo "Deploying Code from Develop Branch"
-               """
-          }
-      }
+node{
+  stage ('Download the artifact') {
+    sh '''
+        wget https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/samples/nodejs.zip
+        pwd
+        ls -ltrh
+      '''
+  }
 }
