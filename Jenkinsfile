@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sh 'aws elasticbeanstalk --help | grep create'
+                sh 'eb --help'
             }
         }
 
