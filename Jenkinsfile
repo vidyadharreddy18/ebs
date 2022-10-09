@@ -1,24 +1,15 @@
-pipeline
-{
-    agent any
-    environment
-    {
-        APP_NAME = 'sample'
-        ENVIRONMENT_NAME = 'sample-env'
-        REGION = 'us-east-2'
-        S3_BUCKET = "artifact"
+node {
+    stage("Checkout") {
+        deleteDir()
+        checkout scm
     }
-    stages
-    {
-        stage('Deploy')
-        {
-            steps {
-                sh '''
-                    eb init --platform node.js --region us-east-2
-                    pwd
-                    ls
-                '''
-            }
-        }
+
+    stage("deploy") {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'AWS', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+
+        sh '''
+            eb init continuous-deployment-demo -p "64bit Amazon Linux 2017.09 v2.6.4 running Java 8" --region "ca-central-1"
+        '''
+
     }
 }
