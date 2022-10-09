@@ -1,9 +1,19 @@
-node{
-  stage ('Download the artifact') {
-    sh '''
-        curl https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/samples/nodejs.zip
-        pwd
-        ls -ltrh
-      '''
-  }
+pipeline
+{
+    agent any
+    environment
+    {
+        APP_NAME = 'sample'
+        ENVIRONMENT_NAME = 'sample-env'
+        REGION = 'us-east-2'
+        S3_BUCKET = "artifact"
+    }
+    stages
+    {
+        stage('Deploy')
+        {
+                sh '''
+                    eb init --platform node.js --region us-east-2
+                '''
+            }
 }
