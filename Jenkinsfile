@@ -1,11 +1,9 @@
 pipeline {
    agent any
-   stages {
-       when {
-           branch "master"
-       }
-       
        stage('Build Code') {
+           when {
+               branch "master"
+           }
            steps {
                sh """
                echo "Building Artifact from Develop Branch"
@@ -13,6 +11,9 @@ pipeline {
            }
        }
       stage('Deploy Code') {
+           when {
+               branch "master"
+           }
           steps {
                sh """
                echo "Deploying Code from Develop Branch"
