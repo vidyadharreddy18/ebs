@@ -5,19 +5,20 @@ pipeline {
             steps {
                 sh 'aws elasticbeanstalk --help | grep create'
             }
-
+        }
 
         stage('Test') {
             steps {
-                sh 'echo "Testing stage"'
+                sh 'echo "Test stage"'
             }
+        }
 
 
         stage('Deploy') {
             steps {
-                sh 'echo "Deployment stage"'
+                sh 'echo "Deploy stage"'
             }
-
         }
+
     }
 }
